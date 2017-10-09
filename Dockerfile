@@ -3,11 +3,7 @@ FROM ubuntu:trusty
 LABEL Maintainer="Tim Bowden <tim.bowden@mapforge.com.au>"
 LABEL version=0.1
 
-ENV WORKON_HOME /data/web_projects/python_apps/virtualenvs
-ENV PROJECT_HOME /data/web_projects/python_apps/apps
 ENV TERM xterm-256color
-
-RUN echo "source /usr/local/bin/virtualenvwrapper.sh" >> /etc/bash.bashrc
 
 RUN apt-get update && apt-get install -y \
     python3-pip \
@@ -15,6 +11,10 @@ RUN apt-get update && apt-get install -y \
 
 RUN pip3 install virtualenvwrapper
 
+RUN echo "source /usr/local/bin/virtualenvwrapper.sh" >> /etc/bash.bashrc
+
+ENV WORKON_HOME /data/web_projects/python_apps/virtualenvs
+ENV PROJECT_HOME /data/web_projects/python_apps/projects
 ENV VIRTUALENVWRAPPER_PYTHON /usr/bin/python3
 
 RUN adduser --gecos  webdev --disabled-password webdev
